@@ -492,6 +492,188 @@
             50% { opacity: 1; transform: scale(1); }
         }
 
+        /* Final Celebration Screen */
+        #finalScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        #finalScreen.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .final-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 
+                0 0 20px rgba(255,255,255,0.8),
+                0 0 40px rgba(255,215,0,0.6),
+                0 5px 30px rgba(0,0,0,0.3);
+            animation: titleBounce 1s ease-out;
+            line-height: 1.2;
+            padding: 0 1rem;
+        }
+
+        @keyframes titleBounce {
+            0% { transform: scale(0) rotate(-10deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .celebration-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            animation: iconsFloat 2s ease-out;
+        }
+
+        @keyframes iconsFloat {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .celebration-icon {
+            font-size: 4rem;
+            animation: iconBounce 2s infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        .celebration-icon:nth-child(1) { animation-delay: 0s; }
+        .celebration-icon:nth-child(2) { animation-delay: 0.2s; }
+        .celebration-icon:nth-child(3) { animation-delay: 0.4s; }
+        .celebration-icon:nth-child(4) { animation-delay: 0.6s; }
+        .celebration-icon:nth-child(5) { animation-delay: 0.8s; }
+        .celebration-icon:nth-child(6) { animation-delay: 1s; }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(-5deg); }
+            75% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .final-message {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.8rem;
+            color: white;
+            text-align: center;
+            margin-top: 2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: messageFade 2s ease-out;
+            padding: 0 2rem;
+        }
+
+        @keyframes messageFade {
+            0% { opacity: 0; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-balloon {
+            position: absolute;
+            font-size: 3rem;
+            animation: floatUpSlow 8s infinite;
+        }
+
+        @keyframes floatUpSlow {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(50px) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: confettiDrop 4s infinite;
+        }
+
+        @keyframes confettiDrop {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(120vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsive for final screen */
+        @media (max-width: 768px) {
+            .final-title {
+                font-size: 2.5rem;
+            }
+
+            .celebration-icon {
+                font-size: 3rem;
+            }
+
+            .celebration-icons {
+                gap: 1.5rem;
+            }
+
+            .final-message {
+                font-size: 1.3rem;
+            }
+
+            .floating-balloon {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .final-title {
+                font-size: 2rem;
+            }
+
+            .celebration-icon {
+                font-size: 2.5rem;
+            }
+
+            .celebration-icons {
+                gap: 1rem;
+            }
+
+            .final-message {
+                font-size: 1.1rem;
+            }
+
+            .floating-balloon {
+                font-size: 1.5rem;
+            }
+        }
+
         /* Party Popper Animation */
         @keyframes popperExplode {
             0% {
@@ -816,6 +998,21 @@
     <!-- Particles Canvas -->
     <canvas id="particles"></canvas>
 
+    <!-- Final Celebration Screen -->
+    <div id="finalScreen">
+        <div class="floating-elements" id="floatingElements"></div>
+        <div class="final-title">Happy Birthday<br/>Fatima! 🎂</div>
+        <div class="celebration-icons">
+            <div class="celebration-icon">🎉</div>
+            <div class="celebration-icon">🎈</div>
+            <div class="celebration-icon">🎊</div>
+            <div class="celebration-icon">💝</div>
+            <div class="celebration-icon">🌟</div>
+            <div class="celebration-icon">✨</div>
+        </div>
+        <div class="final-message">Wishing you the most amazing year ahead! 💖</div>
+    </div>
+
     <!-- Audio Element -->
     <audio id="birthdayAudio" src="aud.mp3" preload="auto"></audio>
 
@@ -841,8 +1038,8 @@
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const isSmallScreen = window.innerWidth <= 768;
         
-        // Adjust particle count for mobile performance
-        const particleMultiplier = (isMobile || isSmallScreen) ? 0.6 : 1;
+        // Adjust particle count for mobile performance - more aggressive reduction
+        const particleMultiplier = (isMobile || isSmallScreen) ? 0.4 : 1;
 
         // Particle class
         class Particle {
@@ -1109,9 +1306,9 @@
                     blowCooldown = true;
                     candlesBlownThisRound = 0;
                     
-                    // Blow up to 3 candles
+                    // Blow up to 10 candles
                     const blowInterval = setInterval(() => {
-                        if (candlesBlownThisRound < 3) {
+                        if (candlesBlownThisRound < 10) {
                             if (allSmallCandlesBlown) {
                                 blowBigCandle();
                                 clearInterval(blowInterval);
@@ -1164,27 +1361,28 @@
                 const x = rect.left + rect.width / 2;
                 const y = rect.top;
 
-                // Party popper explosion effect (reduced for mobile)
-                for (let i = 0; i < Math.floor(25 * particleMultiplier); i++) {
+                // Reduced particles for better performance
+                // Party popper explosion effect
+                for (let i = 0; i < Math.floor(10 * particleMultiplier); i++) {
                     particles.push(new Particle(x, y, 'popper'));
                 }
 
-                // Add balloons (3-5 per candle, reduced for mobile)
-                const balloonCount = Math.floor(4 * particleMultiplier);
+                // Add balloons
+                const balloonCount = Math.floor(2 * particleMultiplier);
                 for (let i = 0; i < balloonCount; i++) {
                     setTimeout(() => {
                         particles.push(new Particle(x + (Math.random() - 0.5) * 100, y, 'balloon'));
                     }, i * 100);
                 }
 
-                // Add confetti (reduced for mobile)
-                for (let i = 0; i < Math.floor(15 * particleMultiplier); i++) {
+                // Add confetti
+                for (let i = 0; i < Math.floor(8 * particleMultiplier); i++) {
                     particles.push(new Particle(x, y, 'confetti'));
                 }
 
-                // Add hearts occasionally (reduced for mobile)
-                if (Math.random() > 0.5) {
-                    const heartCount = Math.floor(3 * particleMultiplier);
+                // Add hearts occasionally (less frequent)
+                if (Math.random() > 0.7) {
+                    const heartCount = Math.floor(2 * particleMultiplier);
                     for (let i = 0; i < heartCount; i++) {
                         setTimeout(() => {
                             particles.push(new Particle(x + (Math.random() - 0.5) * 80, y, 'heart'));
@@ -1192,8 +1390,10 @@
                     }
                 }
 
-                // Create celebratory message
-                createCelebrationText(blownCount);
+                // Create celebratory message (less frequent)
+                if (blownCount % 3 === 0) {
+                    createCelebrationText(blownCount);
+                }
 
                 // Check if all small candles are blown
                 if (blownCount === 24) {
@@ -1221,20 +1421,24 @@
             const x = rect.left + rect.width / 2;
             const y = rect.top + rect.height / 2;
 
-            // Massive explosion from big candle (reduced for mobile)
-            const explosionCount = Math.floor(100 * particleMultiplier);
+            // Reduced explosion from big candle for performance
+            const explosionCount = Math.floor(40 * particleMultiplier);
             for (let i = 0; i < explosionCount; i++) {
                 setTimeout(() => {
                     particles.push(new Particle(x + (Math.random() - 0.5) * 200, y, 'popper'));
-                    particles.push(new Particle(x + (Math.random() - 0.5) * 150, y, 'balloon'));
-                    particles.push(new Particle(x + (Math.random() - 0.5) * 150, y, 'heart'));
-                }, i * 20);
+                    if (i % 2 === 0) {
+                        particles.push(new Particle(x + (Math.random() - 0.5) * 150, y, 'balloon'));
+                    }
+                    if (i % 3 === 0) {
+                        particles.push(new Particle(x + (Math.random() - 0.5) * 150, y, 'heart'));
+                    }
+                }, i * 30);
             }
 
-            // Trigger grand finale
+            // Show final celebration screen
             setTimeout(() => {
-                grandFinale();
-            }, 500);
+                showFinalCelebration();
+            }, 1500);
         }
 
         function createCelebrationText(count) {
@@ -1277,15 +1481,76 @@
         `;
         document.head.appendChild(style);
 
+        function showFinalCelebration() {
+            const finalScreen = document.getElementById('finalScreen');
+            finalScreen.classList.add('show');
+
+            // Add floating balloons
+            const floatingElements = document.getElementById('floatingElements');
+            const balloonEmojis = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎈'];
+            
+            balloonEmojis.forEach((emoji, index) => {
+                setTimeout(() => {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'floating-balloon';
+                    balloon.textContent = emoji;
+                    balloon.style.left = Math.random() * 90 + '%';
+                    balloon.style.bottom = '-10%';
+                    balloon.style.animationDelay = Math.random() * 3 + 's';
+                    balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                    floatingElements.appendChild(balloon);
+                }, index * 500);
+            });
+
+            // Add confetti pieces
+            const confettiColors = ['#ff6b9d', '#ffd700', '#54a0ff', '#48dbfb', '#ff9ff3', '#1dd1a1'];
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti-piece';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-20px';
+                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    floatingElements.appendChild(confetti);
+                }, i * 100);
+            }
+
+            // Vibrate on mobile for celebration
+            if (isMobile && navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 400]);
+            }
+
+            // Continue background animation
+            animateFinalBackground();
+        }
+
+        function animateFinalBackground() {
+            let colorIndex = 0;
+            const colors = [
+                'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+                'linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%)',
+                'linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #43e97b 100%)',
+                'linear-gradient(135deg, #43e97b 0%, #38f9d7 50%, #667eea 100%)'
+            ];
+
+            setInterval(() => {
+                colorIndex = (colorIndex + 1) % colors.length;
+                document.getElementById('finalScreen').style.background = colors[colorIndex];
+            }, 3000);
+        }
+
         function grandFinale() {
+            // Simplified grand finale for better performance
             document.querySelector('.instructions').textContent = '🎉 HAPPY BIRTHDAY FATIMA! 🎂✨🎈';
             document.querySelector('.instructions').style.fontSize = isMobile ? '1.2rem' : '1.5rem';
             document.querySelector('.instructions').style.fontWeight = 'bold';
             
-            // Create massive celebration - waves of particles (optimized for mobile)
+            // Create celebration - reduced waves for performance
             let waveCount = 0;
-            const maxWaves = isMobile ? 8 : 12;
-            const pointCount = isMobile ? 3 : 5;
+            const maxWaves = isMobile ? 4 : 6;
+            const pointCount = isMobile ? 2 : 3;
             
             const waveInterval = setInterval(() => {
                 // Create particles from multiple points across the screen
@@ -1293,32 +1558,24 @@
                     const x = (canvas.width / (pointCount + 1)) * (point + 1);
                     const y = canvas.height;
                     
-                    // Balloons
-                    const balloonCount = Math.floor(8 * particleMultiplier);
+                    // Reduced particle counts
+                    const balloonCount = Math.floor(4 * particleMultiplier);
                     for (let i = 0; i < balloonCount; i++) {
                         setTimeout(() => {
                             particles.push(new Particle(x + (Math.random() - 0.5) * 200, y, 'balloon'));
                         }, i * 30);
                     }
                     
-                    // Hearts
-                    const heartCount = Math.floor(5 * particleMultiplier);
+                    const heartCount = Math.floor(3 * particleMultiplier);
                     for (let i = 0; i < heartCount; i++) {
                         setTimeout(() => {
                             particles.push(new Particle(x + (Math.random() - 0.5) * 200, y, 'heart'));
                         }, i * 40);
                     }
                     
-                    // Confetti
-                    const confettiCount = Math.floor(20 * particleMultiplier);
+                    const confettiCount = Math.floor(10 * particleMultiplier);
                     for (let i = 0; i < confettiCount; i++) {
                         particles.push(new Particle(x + (Math.random() - 0.5) * 300, y - 100, 'confetti'));
-                    }
-                    
-                    // Party poppers
-                    const popperCount = Math.floor(30 * particleMultiplier);
-                    for (let i = 0; i < popperCount; i++) {
-                        particles.push(new Particle(x + (Math.random() - 0.5) * 250, canvas.height * 0.3, 'popper'));
                     }
                 }
                 
@@ -1326,24 +1583,24 @@
                 if (waveCount >= maxWaves) {
                     clearInterval(waveInterval);
                 }
-            }, 300);
+            }, 400);
 
-            // Continuous rain of confetti from top (reduced for mobile)
-            const confettiInterval = isMobile ? 300 : 200;
+            // Simplified confetti rain
+            const confettiInterval = isMobile ? 500 : 300;
             const confettiRain = setInterval(() => {
-                const rainCount = Math.floor(10 * particleMultiplier);
+                const rainCount = Math.floor(5 * particleMultiplier);
                 for (let i = 0; i < rainCount; i++) {
                     const x = Math.random() * canvas.width;
                     particles.push(new Particle(x, -50, 'confetti'));
                 }
             }, confettiInterval);
 
-            const rainDuration = isMobile ? 6000 : 8000;
+            const rainDuration = isMobile ? 4000 : 5000;
             setTimeout(() => clearInterval(confettiRain), rainDuration);
 
-            // Flash the background with celebration colors (reduced for mobile)
+            // Flash the background (reduced)
             let flashCount = 0;
-            const maxFlashes = isMobile ? 8 : 12;
+            const maxFlashes = isMobile ? 4 : 6;
             const flashInterval = setInterval(() => {
                 const colors = [
                     'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -1356,14 +1613,14 @@
                 if (flashCount >= maxFlashes) {
                     clearInterval(flashInterval);
                 }
-            }, 500);
+            }, 600);
         }
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Limit particle count for mobile performance
-            const maxParticles = isMobile ? 150 : 300;
+            // Limit particle count for mobile performance - more aggressive
+            const maxParticles = isMobile ? 100 : 250;
             if (particles.length > maxParticles) {
                 particles = particles.slice(-maxParticles);
             }
